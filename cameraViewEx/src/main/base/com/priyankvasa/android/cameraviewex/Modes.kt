@@ -18,6 +18,7 @@ package com.priyankvasa.android.cameraviewex
 
 import android.annotation.TargetApi
 import android.os.Build
+import android.support.annotation.FloatRange
 import android.support.annotation.IntDef
 
 object Modes {
@@ -74,6 +75,8 @@ object Modes {
             const val FACING_EXTERNAL = 2
         }
     }
+
+
 
     /** The mode for the camera device's auto focus control */
     @IntDef(AutoFocus.AF_OFF,
@@ -172,6 +175,8 @@ object Modes {
             const val SHUTTER_LONG = 400 // ms
         }
     }
+
+    annotation class ManualFocus
 
     const val DEFAULT_ADJUST_VIEW_BOUNDS = true
     val DEFAULT_ASPECT_RATIO: AspectRatio = AspectRatio.of(4, 3)

@@ -126,7 +126,6 @@ class CameraView @JvmOverloads constructor(
                 else -> Camera2Api24(listenerManager, preview, config, SupervisorJob(parentJob), context)
             }
 
-
             config.aspectRatio.observe(camera) {
                 camera.setAspectRatio(it)
                 coroutineScope.launch { requestLayout() }
@@ -143,7 +142,6 @@ class CameraView @JvmOverloads constructor(
      * A new instance should be created if [isActive] is false.
      */
     val isActive: Boolean get() = camera.isActive && parentJob.isActive
-
     /** `true` if the camera is opened `false` otherwise. */
     val isCameraOpened: Boolean get() = camera.isCameraOpened
 
@@ -247,6 +245,15 @@ class CameraView @JvmOverloads constructor(
 
     /** Gets all the aspect ratios supported by the current camera. */
     val supportedAspectRatios: Set<AspectRatio> get() = camera.supportedAspectRatios
+
+    @get:Modes.ManualFocus
+    @setparam:Modes.ManualFocus
+    var manualFocus: Float
+        get() = config.manualFocus.value
+        set(value) {
+            if (!requireInUiThread()) return
+            config.manualFocus.value = value
+        }
 
     /**
      * Set auto focus mode for selected camera. Supported modes are [Modes.AutoFocus].

@@ -18,6 +18,7 @@ package com.priyankvasa.android.cameraviewex
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.hardware.camera2.CaptureRequest
 import android.util.AttributeSet
 
 class CameraConfiguration private constructor() {
@@ -32,6 +33,7 @@ class CameraConfiguration private constructor() {
     internal val outputFormat: NonNullableLiveData<Int> = NonNullableLiveData(Modes.DEFAULT_OUTPUT_FORMAT)
     internal val jpegQuality: NonNullableLiveData<Int> = NonNullableLiveData(Modes.DEFAULT_JPEG_QUALITY)
     internal val facing: NonNullableLiveData<Int> = NonNullableLiveData(Modes.DEFAULT_FACING)
+    internal val manualFocus: NonNullableLiveData<Float> = NonNullableLiveData(0.0f)
     internal val autoFocus: NonNullableLiveData<Int> = NonNullableLiveData(Modes.DEFAULT_AUTO_FOCUS)
     internal val touchToFocus: NonNullableLiveData<Boolean> = NonNullableLiveData(Modes.DEFAULT_TOUCH_TO_FOCUS)
     internal val pinchToZoom: NonNullableLiveData<Boolean> = NonNullableLiveData(Modes.DEFAULT_PINCH_TO_ZOOM)

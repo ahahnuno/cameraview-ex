@@ -682,6 +682,16 @@ internal open class Camera2(
             start(Modes.DEFAULT_CAMERA_ID)
         }
 
+        manualFocus.observe(this@Camera2)
+        {
+            previewRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
+            captureSession?.setRepeatingRequest(
+                previewRequestBuilder.build(),
+                defaultCaptureCallback,
+                backgroundHandler
+            )
+        }
+
         autoFocus.observe(this@Camera2) {
             updateAf()
             try {
