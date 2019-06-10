@@ -684,12 +684,23 @@ internal open class Camera2(
 
         manualFocus.observe(this@Camera2)
         {
-            previewRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
-            captureSession?.setRepeatingRequest(
-                previewRequestBuilder.build(),
-                defaultCaptureCallback,
-                backgroundHandler
-            )
+            if (isVideoRecording)
+            {
+                videoRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
+                captureSession?.setRepeatingRequest(
+                        videoRequestBuilder.build(),
+                        defaultCaptureCallback,
+                        backgroundHandler
+                )
+            }
+            else {
+                previewRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
+                captureSession?.setRepeatingRequest(
+                        previewRequestBuilder.build(),
+                        defaultCaptureCallback,
+                        backgroundHandler
+                )
+            }
         }
 
         autoFocus.observe(this@Camera2) {
