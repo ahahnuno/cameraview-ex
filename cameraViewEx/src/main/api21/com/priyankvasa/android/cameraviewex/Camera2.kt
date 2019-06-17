@@ -43,6 +43,7 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.SystemClock
 import android.renderscript.RenderScript
+import android.util.Log
 import android.util.SparseIntArray
 import android.view.Surface
 import com.priyankvasa.android.cameraviewex.exif.ExifInterface
@@ -684,23 +685,31 @@ internal open class Camera2(
 
         manualFocus.observe(this@Camera2)
         {
-            if (isVideoRecording)
-            {
-                videoRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
-                captureSession?.setRepeatingRequest(
-                        videoRequestBuilder.build(),
-                        defaultCaptureCallback,
-                        backgroundHandler
-                )
-            }
-            else {
-                previewRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
-                captureSession?.setRepeatingRequest(
-                        previewRequestBuilder.build(),
-                        defaultCaptureCallback,
-                        backgroundHandler
-                )
-            }
+                try {
+                    previewRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
+                    captureSession?.setRepeatingRequest(
+                            previewRequestBuilder.build(),
+                            defaultCaptureCallback,
+                            backgroundHandler
+                    )
+                    Log.d("CameraView", "Preview focused")
+                }
+                catch (e: Exception)
+                {
+                    try {
+                        videoRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
+                        captureSession?.setRepeatingRequest(
+                                videoRequestBuilder.build(),
+                                defaultCaptureCallback,
+                                backgroundHandler
+                        )
+                        Log.d("CameraView", "Video focused")
+                    }
+                    catch(e: Exception)
+                    {
+                        Log.d("CameraView", "Focus was not possible")
+                    }
+                }
         }
 
         autoFocus.observe(this@Camera2) {
@@ -902,7 +911,7 @@ internal open class Camera2(
 
     final override fun takePicture() {
         if (config.autoFocus.value == Modes.AutoFocus.AF_OFF || videoManager.isVideoRecording) captureStillPicture()
-        else lockFocus()
+        else //lockFocus()
     }
 
     /**
