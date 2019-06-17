@@ -911,7 +911,11 @@ internal open class Camera2(
 
     final override fun takePicture() {
         if (config.autoFocus.value == Modes.AutoFocus.AF_OFF || videoManager.isVideoRecording) captureStillPicture()
-        else //lockFocus()
+        else
+        {
+            //lockFocus()
+            Log.d("CameraView", "We didn't lock focus because we're gamers.");
+        }
     }
 
     /**
