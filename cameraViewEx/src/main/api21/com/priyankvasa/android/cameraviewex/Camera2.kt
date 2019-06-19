@@ -692,23 +692,16 @@ internal open class Camera2(
                             defaultCaptureCallback,
                             backgroundHandler
                     )
-                    Log.d("CameraView", "Preview focused")
+
                 }
                 catch (e: Exception)
                 {
-                    try {
-                        videoRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
-                        captureSession?.setRepeatingRequest(
-                                videoRequestBuilder.build(),
-                                defaultCaptureCallback,
-                                backgroundHandler
-                        )
-                        Log.d("CameraView", "Video focused")
-                    }
-                    catch(e: Exception)
-                    {
-                        Log.d("CameraView", "Focus was not possible")
-                    }
+                    videoRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE, it * 10f)
+                    captureSession?.setRepeatingRequest(
+                        videoRequestBuilder.build(),
+                        defaultCaptureCallback,
+                        backgroundHandler
+                    )
                 }
         }
 
@@ -1332,6 +1325,8 @@ internal open class Camera2(
                         ?: CaptureRequest.FLASH_MODE_OFF
 
                 set(CaptureRequest.FLASH_MODE, flashMode)
+
+                set(CaptureRequest.LENS_FOCUS_DISTANCE, captureRequestBuilder.get(CaptureRequest.LENS_FOCUS_DISTANCE) * 0.5f)
 
                 if (singleCaptureReader?.imageFormat == ImageFormat.JPEG) {
                     set(CaptureRequest.JPEG_ORIENTATION, outputOrientation)
