@@ -259,7 +259,7 @@ internal open class Camera2(
                 request: CaptureRequest,
                 result: TotalCaptureResult
             ) {
-                if (!videoManager.isVideoRecording) unlockFocus()
+                //if (!videoManager.isVideoRecording) unlockFocus()
             }
         }
     }
@@ -907,7 +907,6 @@ internal open class Camera2(
         else
         {
             //lockFocus()
-            Log.d("CameraView", "We didn't lock focus because we're gamers.");
         }
     }
 
@@ -1265,7 +1264,7 @@ internal open class Camera2(
 
     private fun updateModes() {
         updateScalerCropRegion()
-        updateAf()
+        //updateAf()
         updateFlash()
         updateAwb()
         updateOis()
