@@ -259,7 +259,7 @@ internal open class Camera2(
                 request: CaptureRequest,
                 result: TotalCaptureResult
             ) {
-                //if (!videoManager.isVideoRecording) unlockFocus()
+                if (!videoManager.isVideoRecording) unlockFocus()
             }
         }
     }
@@ -664,6 +664,8 @@ internal open class Camera2(
 
     final override fun getLifecycle(): Lifecycle = lifecycleRegistry
 
+    private var manfoc : Float = 0f
+
     private fun addObservers(): Unit = config.run {
 
         cameraMode.observe(this@Camera2) {
@@ -692,7 +694,7 @@ internal open class Camera2(
                             defaultCaptureCallback,
                             backgroundHandler
                     )
-
+                    manfoc = it * 10f
                 }
                 catch (e: Exception)
                 {
@@ -906,7 +908,7 @@ internal open class Camera2(
         if (config.autoFocus.value == Modes.AutoFocus.AF_OFF || videoManager.isVideoRecording) captureStillPicture()
         else
         {
-            //lockFocus()
+            lockFocus()
         }
     }
 
@@ -1264,7 +1266,7 @@ internal open class Camera2(
 
     private fun updateModes() {
         updateScalerCropRegion()
-        //updateAf()
+        updateAf()
         updateFlash()
         updateAwb()
         updateOis()
@@ -1325,13 +1327,14 @@ internal open class Camera2(
 
                 set(CaptureRequest.FLASH_MODE, flashMode)
 
-                set(CaptureRequest.LENS_FOCUS_DISTANCE, captureRequestBuilder.get(CaptureRequest.LENS_FOCUS_DISTANCE) * 0.5f)
-
                 if (singleCaptureReader?.imageFormat == ImageFormat.JPEG) {
                     set(CaptureRequest.JPEG_ORIENTATION, outputOrientation)
                 }
 
                 set(CaptureRequest.JPEG_QUALITY, config.jpegQuality.value.toByte())
+
+                Log.d("capture", "Yo it is: " + manfoc)
+                set(CaptureRequest.LENS_FOCUS_DISTANCE, manfoc)
             }
 
             // Stop preview and capture a still picture.
