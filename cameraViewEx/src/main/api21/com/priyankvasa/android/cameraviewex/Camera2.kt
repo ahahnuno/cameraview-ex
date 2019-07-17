@@ -1311,7 +1311,7 @@ internal open class Camera2(
                 addTarget(surface)
 
                 set(CaptureRequest.SCALER_CROP_REGION, previewRequestBuilder[CaptureRequest.SCALER_CROP_REGION])
-                set(CaptureRequest.CONTROL_AF_MODE, previewRequestBuilder[CaptureRequest.CONTROL_AF_MODE])
+                //set(CaptureRequest.CONTROL_AF_MODE, previewRequestBuilder[CaptureRequest.CONTROL_AF_MODE])
                 set(CaptureRequest.CONTROL_AWB_MODE, previewRequestBuilder[CaptureRequest.CONTROL_AWB_MODE])
                 set(
                     CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE,
@@ -1333,7 +1333,6 @@ internal open class Camera2(
 
                 set(CaptureRequest.JPEG_QUALITY, config.jpegQuality.value.toByte())
 
-                Log.d("capture", "Yo it is: " + manfoc)
                 set(CaptureRequest.LENS_FOCUS_DISTANCE, manfoc)
             }
 
