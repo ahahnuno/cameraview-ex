@@ -92,6 +92,7 @@ internal class VideoManager(private val warn: (message: String) -> Unit) {
         baseRequestBuilder[CaptureRequest.SCALER_CROP_REGION]
             ?.let { set(CaptureRequest.SCALER_CROP_REGION, it) }
 
+        /*
         val afMode: Int = when (baseRequestBuilder[CaptureRequest.CONTROL_AF_MODE]) {
             CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ->
                 CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO
@@ -100,6 +101,7 @@ internal class VideoManager(private val warn: (message: String) -> Unit) {
         }
 
         set(CaptureRequest.CONTROL_AF_MODE, afMode)
+        */
 
         baseRequestBuilder[CaptureRequest.CONTROL_AWB_MODE]
             ?.let { set(CaptureRequest.CONTROL_AWB_MODE, it) }
