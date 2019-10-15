@@ -60,6 +60,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.File
+import java.nio.ByteBuffer
 import java.util.SortedSet
 import java.util.TreeSet
 import java.util.concurrent.Semaphore
@@ -358,7 +359,7 @@ internal open class Camera2(
                 internalImage.setCropRect()
 
                 val imageData: ByteArray =
-                    runCatching { imageProcessor.decode(internalImage, Modes.OutputFormat.YUV_420_888) }
+                    runCatching { imageProcessor.decode(internalImage, Modes.OutputFormat.RGBA_8888) }
                         .getOrElse {
                             internalImage.close()
                             return@launch

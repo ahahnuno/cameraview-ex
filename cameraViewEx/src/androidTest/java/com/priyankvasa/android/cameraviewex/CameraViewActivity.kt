@@ -17,7 +17,11 @@
 package com.priyankvasa.android.cameraviewex
 
 import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
+import android.view.SurfaceView
 import com.priyankvasa.android.cameraviewex.test.R
 
 class CameraViewActivity : Activity() {
@@ -44,5 +48,14 @@ class CameraViewActivity : Activity() {
     override fun onDestroy() {
         camera.destroy()
         super.onDestroy()
+    }
+
+    fun quickFrame(): Bitmap {
+        val v = findViewById<SurfaceView>(R.id.save_image_matrix)
+        val b = Bitmap.createBitmap(v.layoutParams.width, v.layoutParams.height, Bitmap.Config.ARGB_8888)
+        val c = Canvas(b)
+        v.layout(0, 0, v.layoutParams.width, v.layoutParams.height)
+        v.draw(c)
+        return b
     }
 }

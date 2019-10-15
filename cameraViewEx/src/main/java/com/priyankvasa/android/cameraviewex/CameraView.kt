@@ -193,7 +193,7 @@ class CameraView @JvmOverloads constructor(
         }
 
     /**
-     * Set desired size for continuous frames. This only affects dimensions of frame, the orientation is decided by [aspectRatio].
+     * Set desired size for continuous Fs. This only affects dimensions of frame, the orientation is decided by [aspectRatio].
      *
      * Valid formats are [W1440,H1080], [H1440,W1080], [W1440,1080], [1440,W1080], [H1440,1080], [1440,H1080]
      * The output is not guaranteed to be of this size.
