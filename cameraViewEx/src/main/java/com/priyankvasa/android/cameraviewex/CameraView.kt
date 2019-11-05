@@ -21,6 +21,7 @@ package com.priyankvasa.android.cameraviewex
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -603,6 +604,11 @@ class CameraView @JvmOverloads constructor(
         )
 
         else -> camera.takePicture()
+    }
+
+    fun bitmap(): Bitmap
+    {
+        return camera.bitbird;
     }
 
     /**

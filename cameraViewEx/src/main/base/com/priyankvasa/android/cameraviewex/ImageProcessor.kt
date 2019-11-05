@@ -79,6 +79,27 @@ class ImageProcessor(private val rs: RenderScript) {
         else -> throw UnsupportedOperationException("Image format ${image.format} is not supported.")
     }
 
+    internal fun bitmap(image: Image) : Bitmap
+    {
+        val startTime: Long = SystemClock.elapsedRealtime()
+
+        val adjustedWidth: Int = image.cropWidth
+        val adjustedHeight: Int = image.cropHeight
+
+        val buffer: ByteBuffer = image.planes[0].buffer.apply { rewind() }
+
+        val imageData: ByteArray = ByteArray(buffer.remaining()).apply { buffer.get(this) }
+
+        Timber.d("Normal processing time: ${SystemClock.elapsedRealtime() - startTime}")
+
+        val croppedBitmap: Bitmap =
+                BitmapRegionDecoder.newInstance(imageData, 0, imageData.size, true)
+                        ?.decodeRegion(image.cropRect, null)
+                        ?: throw IllegalStateException("Provided image data could not be decoded.")
+
+        return croppedBitmap
+    }
+
     @Throws(IllegalArgumentException::class, IllegalStateException::class, IOException::class)
     fun getJpegImageData(image: Image): ByteArray {
 
@@ -96,9 +117,9 @@ class ImageProcessor(private val rs: RenderScript) {
         if (adjustedWidth == image.width && adjustedHeight == image.height) return imageData
 
         val croppedBitmap: Bitmap =
-            BitmapRegionDecoder.newInstance(imageData, 0, imageData.size, true)
-                ?.decodeRegion(image.cropRect, null)
-                ?: throw IllegalStateException("Provided image data could not be decoded.")
+                BitmapRegionDecoder.newInstance(imageData, 0, imageData.size, true)
+                        ?.decodeRegion(image.cropRect, null)
+                        ?: throw IllegalStateException("Provided image data could not be decoded.")
 
         return ByteArrayOutputStream(croppedBitmap.byteCount)
             .apply { croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, this) }

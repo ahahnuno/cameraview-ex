@@ -23,6 +23,7 @@ import android.annotation.TargetApi
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleRegistry
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.ImageFormat
 import android.graphics.Rect
 import android.hardware.camera2.CameraAccessException
@@ -313,6 +314,8 @@ internal open class Camera2(
         return false
     }
 
+    var bitbird: Bitmap? = null
+
     private val onPreviewImageAvailableListener: ImageReader.OnImageAvailableListener by lazy {
 
         // Timestamp of the last frame processed. Used for de-bouncing purposes.
@@ -342,6 +345,8 @@ internal open class Camera2(
                     // acquireNextImage() is nullable and throws exception if max images already acquired
                     runCatching { reader.acquireNextImage() }.getOrNull() ?: return@launch
 
+                bitbird = imageProcessor.bitmap(internalImage)
+
                 // The reason for using flag instead of de-bouncing right from beginning is because
                 // once this listener is called, image must be acquired from image reader otherwise preview will freeze.
                 // After acquiring image if debounce is true, close the image and return.
@@ -359,7 +364,7 @@ internal open class Camera2(
                 internalImage.setCropRect()
 
                 val imageData: ByteArray =
-                    runCatching { imageProcessor.decode(internalImage, Modes.OutputFormat.RGBA_8888) }
+                    runCatching { imageProcessor.decode(internalImage, Modes.OutputFormat.YUV_420_888) }
                         .getOrElse {
                             internalImage.close()
                             return@launch

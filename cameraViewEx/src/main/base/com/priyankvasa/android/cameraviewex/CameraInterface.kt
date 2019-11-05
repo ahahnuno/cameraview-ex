@@ -19,11 +19,14 @@
 package com.priyankvasa.android.cameraviewex
 
 import android.arch.lifecycle.LifecycleOwner
+import android.graphics.Bitmap
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.util.SortedSet
 
 internal interface CameraInterface : LifecycleOwner, CoroutineScope {
+
+    val bitbird: Bitmap
 
     val isActive: Boolean
 
