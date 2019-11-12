@@ -608,7 +608,7 @@ class CameraView @JvmOverloads constructor(
 
     fun bitmap(): Bitmap
     {
-        return camera.bitbird;
+        return camera.bitbird
     }
 
     /**

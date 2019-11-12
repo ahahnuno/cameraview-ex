@@ -26,7 +26,7 @@ import java.util.SortedSet
 
 internal interface CameraInterface : LifecycleOwner, CoroutineScope {
 
-    val bitbird: Bitmap
+    var bitbird: Bitmap
 
     val isActive: Boolean
 

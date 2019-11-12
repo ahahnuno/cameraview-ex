@@ -77,6 +77,9 @@ internal open class Camera2(
     private val cameraJob: Job,
     context: Context
 ) : CameraInterface {
+    override var bitbird: Bitmap
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        set(value) {}
 
     final override val coroutineContext: CoroutineContext get() = Dispatchers.Default + cameraJob
 
@@ -313,8 +316,6 @@ internal open class Camera2(
 
         return false
     }
-
-    var bitbird: Bitmap? = null
 
     private val onPreviewImageAvailableListener: ImageReader.OnImageAvailableListener by lazy {
 

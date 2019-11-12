@@ -22,6 +22,7 @@ package com.priyankvasa.android.cameraviewex
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleRegistry
+import android.graphics.Bitmap
 import android.graphics.ImageFormat
 import android.hardware.Camera
 import android.os.Build
@@ -52,6 +53,9 @@ internal class Camera1(
     private val config: CameraConfiguration,
     private val cameraJob: Job
 ) : CameraInterface {
+    override var bitbird: Bitmap
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        set(value) {}
 
     override val coroutineContext: CoroutineContext get() = Dispatchers.Default + cameraJob
 
