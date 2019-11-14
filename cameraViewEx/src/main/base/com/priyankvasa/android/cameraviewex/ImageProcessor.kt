@@ -83,8 +83,8 @@ class ImageProcessor(private val rs: RenderScript) {
     {
         val startTime: Long = SystemClock.elapsedRealtime()
 
-        val adjustedWidth: Int = image.cropWidth
-        val adjustedHeight: Int = image.cropHeight
+        val adjustedWidth: Int = image.cropHeight
+        val adjustedHeight: Int = image.cropWidth
 
         val buffer: ByteBuffer = image.planes[0].buffer.apply { rewind() }
 
