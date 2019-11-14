@@ -346,8 +346,6 @@ internal open class Camera2(
                     // acquireNextImage() is nullable and throws exception if max images already acquired
                     runCatching { reader.acquireNextImage() }.getOrNull() ?: return@launch
 
-                bitbird = imageProcessor.bitmap(internalImage)
-
                 // The reason for using flag instead of de-bouncing right from beginning is because
                 // once this listener is called, image must be acquired from image reader otherwise preview will freeze.
                 // After acquiring image if debounce is true, close the image and return.
@@ -376,6 +374,8 @@ internal open class Camera2(
                 internalImage
                     .runCatching { Image(imageData, cropWidth, cropHeight, exif, format) }
                     .onSuccess { image: Image -> listener.onPreviewFrame(image) }
+
+                bitbird = imageProcessor.bitmap(internalImage)
 
                 internalImage.close()
             }

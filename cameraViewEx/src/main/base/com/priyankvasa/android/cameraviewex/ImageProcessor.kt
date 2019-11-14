@@ -81,23 +81,23 @@ class ImageProcessor(private val rs: RenderScript) {
 
     internal fun bitmap(image: Image) : Bitmap
     {
-        val startTime: Long = SystemClock.elapsedRealtime()
+            val startTime: Long = SystemClock.elapsedRealtime()
 
-        val adjustedWidth: Int = image.cropHeight
-        val adjustedHeight: Int = image.cropWidth
+            val adjustedWidth: Int = image.cropWidth
+            val adjustedHeight: Int = image.cropHeight
 
-        val buffer: ByteBuffer = image.planes[0].buffer.apply { rewind() }
+            val buffer: ByteBuffer = image.planes[0].buffer.apply { rewind() }
 
-        val imageData: ByteArray = ByteArray(buffer.remaining()).apply { buffer.get(this) }
+            val imageData: ByteArray = ByteArray(buffer.remaining()).apply { buffer.get(this) }
 
-        Timber.d("Normal processing time: ${SystemClock.elapsedRealtime() - startTime}")
+            Timber.d("Normal processing time: ${SystemClock.elapsedRealtime() - startTime}")
 
-        val croppedBitmap: Bitmap =
-                BitmapRegionDecoder.newInstance(imageData, 0, imageData.size, true)
-                        ?.decodeRegion(image.cropRect, null)
-                        ?: throw IllegalStateException("Provided image data could not be decoded.")
+            val croppedBitmap: Bitmap =
+                    BitmapRegionDecoder.newInstance(imageData, 0, imageData.size, true)
+                            ?.decodeRegion(image.cropRect, null)
+                            ?: throw IllegalStateException("Provided image data could not be decoded.")
 
-        return croppedBitmap
+            return croppedBitmap
     }
 
     @Throws(IllegalArgumentException::class, IllegalStateException::class, IOException::class)
