@@ -1,6 +1,6 @@
 # Goals and intentions
 
-Adam Hahn and Blaine Minden created this library because of the lack of an open source Android camera library that would be good to use in medical applications. Manual focus is what makes this library different than any other Android camera library. In order to be useful in medical applications, we built the library to allow the user to focus based on a value in the same way someone would focus a microscope.
+Adam Hahn and Blaine Minden created this library because of the lack of an open source Android camera library that would be good to use in medical applications. Manual focus is what makes this library different than any other Android camera library. In order to be useful in medical applications, we built the library to allow the user to focus based on a value in the same way someone would turn a dial on a microscope.
 
 # CameraViewEx
 
@@ -33,6 +33,7 @@ Minimum API 14 is required to use CameraViewEx.
 - Adjustable output image quality
 - Zero shutter lag mode
 - Shutter animation for single capture
+- Manual focus
 
 ## Usage
 
