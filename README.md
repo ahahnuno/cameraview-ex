@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/pvasa/cameraview-ex.svg?branch=master)](https://travis-ci.org/pvasa/cameraview-ex)
-[![Download](https://api.bintray.com/packages/ryan652/android/cameraview-ex/images/download.svg)](https://bintray.com/ryan652/android/cameraview-ex/_latestVersion)
-[![License](https://img.shields.io/github/license/pvasa/cameraview-ex.svg)](LICENSE)
+# Goals and intentions
+
+Adam Hahn and Blaine Minden created this library because of the lack of an open source Android camera library that would be good to use in medical applications. Manual focus is what makes this library different than any other Android camera library. In order to be useful in medical applications, we built the library to allow the user to focus based on a value in the same way someone would focus a microscope.
 
 # CameraViewEx
 
@@ -15,11 +15,6 @@ Minimum API 14 is required to use CameraViewEx.
 |:---------:|------------|--------------|
 | 14-20     | Camera1    | TextureView  |
 | 21+       | Camera2    | TextureView  |
-
-#### Why another camera library?
-Every camera library out there has some issues. Some good ones uses only camera1 api which cannot give best performance possible with today's devices, some are not updated anymore, some does not have all the features while some has a lot of features but uses complex api. CameraViewEx tries to solve all these issues while providing simpler api and more features.
-
-> Note: This is alpha version with more advanced features like any size preview and customizable output sizes. If you need more stable version or find any issues with this version, please switch to [version v3.4.3](https://github.com/pvasa/cameraview-ex/tree/v3.4.3).
 
 ## Features
 - High quality image capture
@@ -224,9 +219,3 @@ camera.nextCamera() // Switch to next back facing camera
 | supportedAspectRatios <br> (get only)        | N/A                      | Returns list of `AspectRatio` supported by selected camera.                                                                     | :heavy_check_mark:             | :heavy_check_mark:          |
 | maxDigitalZoom <br> (get only)               | N/A                      | Returns a float value which is the maximum possible digital zoom value supported by selected camera.                            | :x:                            | :heavy_check_mark:          |
 | currentDigitalZoom                           | N/A                      | Set camera digital zoom value. Must be between 1.0 and `CameraView.maxDigitalZoom` inclusive.                                   | :x:                            | :heavy_check_mark:          |
-
-## Documentation
-
-For detailed documentation, please refer these [docs](https://priyankvasa.dev/cameraviewex).
-## Contribution Guidelines
-See [CONTRIBUTING.md](https://github.com/pvasa/cameraview-ex/blob/master/CONTRIBUTING.md).
